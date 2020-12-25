@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_tutorial/app_screens/first_screen.dart';
+import 'package:flutter_app_tutorial/app_screens/home.dart';
+
+void main(){
+  runApp(MaterialApp(
+    title: "Exploring UI widgets",
+    home: Home(),
+  ));
+}
+/*import 'package:flutter_app_tutorial/app_screens/first_screen.dart';
 
 void main() => runApp(new MyFlutterApp());
 
@@ -20,4 +28,4 @@ class MyFlutterApp extends StatelessWidget{
 
   }
 
-}
+}*/

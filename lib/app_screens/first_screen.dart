@@ -21,7 +21,6 @@ class FirstScreen extends StatelessWidget{
 
   String generateRandomNumber(){
     var random = Random();
-    //return random.nextInt(10);
     return "Your Lucky Number ${random.nextInt(10)}";
   }
 
