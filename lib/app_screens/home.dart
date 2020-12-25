@@ -72,10 +72,26 @@ class Home extends StatelessWidget {
                       color: Colors.white),
                 ))
               ],
-            )
+            ),
+
+            //Column3
+            GoogleImageAsset()
+
           ],
         ),
       ),
     );
   }
+}
+
+class GoogleImageAsset extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    AssetImage assetImage = AssetImage('images/btn_google.png');
+    Image image = Image(image: assetImage, width: 250.0, height: 250.0,);
+    return Container(child: image,);
+  }
+
 }
