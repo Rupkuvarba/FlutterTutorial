@@ -9,18 +9,40 @@ class Home extends StatelessWidget{
       child: Container(
         alignment: Alignment.center,
         color: Colors.deepPurple,
-        child: Text(
-          "Flight",
-          textDirection: TextDirection.ltr,
-          style: TextStyle(
-              decoration: TextDecoration.none,
-              fontSize: 75.0,
-              fontFamily: "DMSans",
-              fontWeight: FontWeight.w500,
-              fontStyle: FontStyle.italic,
-              color: Colors.white
-          ) ,
-        ),
+        child: Row(
+           children: [
+
+             Expanded(child: Text(
+               "Flight",
+               textDirection: TextDirection.ltr,
+               style: TextStyle(
+                   decoration: TextDecoration.none,
+                   fontSize: 35.0,
+                   fontFamily: "DMSans",
+                   fontWeight: FontWeight.w500,
+                   fontStyle: FontStyle.italic,
+                   color: Colors.white
+               ) ,
+             )),
+
+             Expanded(child:
+             Text(
+               "Flight1 which is coming from banglore",
+               textDirection: TextDirection.ltr,
+               style: TextStyle(
+                   decoration: TextDecoration.none,
+                   fontSize: 20.0,
+                   fontFamily: "DMSans",
+                   fontWeight: FontWeight.w500,
+                   fontStyle: FontStyle.italic,
+                   color: Colors.white
+               ) ,
+             )
+             )
+
+           ],
+        )
+
       ),
     );
 
