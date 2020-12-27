@@ -14,12 +14,12 @@ class Home extends StatelessWidget {
         //column
         child: Column(
           children: [
-            //Column-1
+            //-1
             Row(
               children: [
                 Expanded(
                     child: Text(
-                  "Flight",
+                  "Android Developer",
                   textDirection: TextDirection.ltr,
                   style: TextStyle(
                       decoration: TextDecoration.none,
@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
                 )),
                 Expanded(
                     child: Text(
-                  "Flight1 which is coming from banglore",
+                  "Create android app in native. He can create app using java/kotlin programming language,",
                   textDirection: TextDirection.ltr,
                   style: TextStyle(
                       decoration: TextDecoration.none,
@@ -49,7 +49,7 @@ class Home extends StatelessWidget {
               children: [
                 Expanded(
                     child: Text(
-                  "Vegetable",
+                  "Flutter Developer",
                   textDirection: TextDirection.ltr,
                   style: TextStyle(
                       decoration: TextDecoration.none,
@@ -61,7 +61,7 @@ class Home extends StatelessWidget {
                 )),
                 Expanded(
                     child: Text(
-                  "Vegetables grows in land. It will help us alot",
+                  "Create Android and iOS app using flutter. She can crate app using Dart programming language",
                   textDirection: TextDirection.ltr,
                   style: TextStyle(
                       decoration: TextDecoration.none,
@@ -75,8 +75,9 @@ class Home extends StatelessWidget {
             ),
 
             //Column3
-            GoogleImageAsset()
+            GoogleImageAsset(),
 
+            FlightBookButton()
           ],
         ),
       ),
@@ -84,14 +85,54 @@ class Home extends StatelessWidget {
   }
 }
 
-class GoogleImageAsset extends StatelessWidget{
-
+class GoogleImageAsset extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     AssetImage assetImage = AssetImage('images/btn_google.png');
-    Image image = Image(image: assetImage, width: 250.0, height: 250.0,);
-    return Container(child: image,);
+    Image image = Image(
+      image: assetImage,
+      width: 150.0,
+      height: 150.0,
+    );
+    return Container(
+      child: image,
+    );
+  }
+}
+
+class FlightBookButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      width: 300.0,
+      height: 80.0,
+      margin: EdgeInsets.only(top: 30.0),
+      child: RaisedButton(
+          color: Colors.orangeAccent,
+          child: Text(
+            "Book developer",
+            style: TextStyle(
+                fontSize: 20.0,
+                fontFamily: "DMSans",
+                fontWeight: FontWeight.w500,
+                color: Colors.white),
+          ),
+          elevation: 6.0,
+          onPressed: () => bookDeveloper(context)),
+    );
   }
 
+  void bookDeveloper(BuildContext context) {
+    //Create dialog
+    var alertDialog = AlertDialog(
+      title: Text("Developer booking successfully"),
+      content: Text("Have a good day!"),
+    );
+
+    //Show dialog
+    showDialog(
+        context: context, builder: (BuildContext context) => alertDialog);
+  }
 }
