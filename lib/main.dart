@@ -1,124 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_tutorial/app_screens/home.dart';
 
 void main(){
-  runApp(MaterialApp(
 
-    title: "Exploring UI widgets",
-
-    home: Scaffold(
-
-      appBar: AppBar(title: Text("Basic ListView"),),
-      body: getLongListView(),  //Long ListView
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        tooltip: "Add one more item",   //long press on icon you can see this text
-        onPressed: (){
-          debugPrint("Fab clicked");
-        },
-      ),
-
-    ),
-
-  ));
-}
-
-/*
-Basic listView
- */
-
-Widget getListView(){
-
-  var listView = ListView(
-    children: <Widget>[
-
-      ListTile(
-        leading: Icon(Icons.landscape),
-        title: Text("Landscape"),
-        subtitle: Text("Beautiful view"),
-        trailing: Icon(Icons.wb_sunny),
-        onTap: (){
-          debugPrint("Landscape tapped");
-        },
-      ),
-
-      ListTile(
-        leading: Icon(Icons.laptop_chromebook),
-        title: Text("Mac"),
-        trailing: Icon(Icons.wb_cloudy),
-      ),
-
-      ListTile(
-        leading: Icon(Icons.phone),
-        title: Text("Phone"),
-      ),
-
-      ListTile(
-        title: Text("Only title"),
-      ),
-
-      Container(
-        child: Text("Yet another element in list",),
-        margin: EdgeInsets.all(10.0),
-      ),
-
-      Container(margin: EdgeInsets.all(10.0), color: Colors.red, height: 30,),
-
-    ],
+  runApp(
+    MaterialApp(
+      title: "Stateful App Example",
+      home: FavouriteCity(),
+    )
   );
 
-  return listView;
 }
 
+//Step1: Create the class that extends stateful widget, that returns a state in "CreateState()"
+class FavouriteCity extends StatefulWidget{
 
-/*
-Long List
- */
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+     return _FavouriteCityState();
+  }
 
-//1.prepare the data source
-
-List<String> getListElements(){
-  var items = List<String>.generate(100, (index) => "Item $index");
-  return items;
 }
 
-//2. Convert data source into widgets
-Widget getLongListView(){
+//Step2:  create a state class, with properties that may change
+class _FavouriteCityState extends State<FavouriteCity>{
 
-  var listItems = getListElements();
+  String nameOfCity = "";
 
-  var listView = ListView.builder(
-      itemCount: listItems.length,
-      itemBuilder: (context, index){
-        return ListTile(
-          leading: Icon(Icons.arrow_right),
-          title: Text(listItems[index]),
-          onTap: (){
-            debugPrint("${listItems[index]} was tapped");
-            showSnackBar(context, listItems[index]);
-          },
-        );
-      }
-  );
+  //Step3: Within “State” class, implement the “build()” method
+  @override
+  Widget build(BuildContext context) {
+     return Scaffold(
 
-  return listView;
+       appBar: AppBar(
+         title: Text("Stateful Exmple"),
+       ),
+       body: Container(
+         margin: EdgeInsets.all(15.0),
+         child: Column(
+           children: <Widget>[
+
+             TextField(
+               onSubmitted: (String userInput){
+                 //Step4: Call the setState() to make the changes. Calling setState() tells framework to redraw widget
+                 setState(() {
+                   nameOfCity = userInput;
+                 });
+               },
+             ),
+
+             Padding(
+               padding: EdgeInsets.all(20.0),
+               child: Text(
+                 "Your best city is $nameOfCity",
+                 style: TextStyle(fontSize: 15.0),),
+             )
+             
+           ],
+         ),
+       ),
+     );
+  }
+
 }
-
-/*
-Floating action button
- */
-
-void showSnackBar(BuildContext context, String item){
-  var snackBar = SnackBar(
-    content: Text("You just tapped $item"),
-    action: SnackBarAction(
-      label: "Undo",
-      onPressed: (){
-        debugPrint("Undo pressed");
-      },
-    ),
-  );
-
-  Scaffold.of(context).showSnackBar(snackBar);
-}
-
