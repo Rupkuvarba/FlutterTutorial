@@ -3,15 +3,56 @@ import 'package:flutter_app_tutorial/app_screens/home.dart';
 
 void main(){
   runApp(MaterialApp(
+
     title: "Exploring UI widgets",
+
     home: Scaffold(
+
       appBar: AppBar(title: Text("Basic ListView"),),
-      body: getListview(),
+      body: getLongListView(),  //Long ListView
+      //body: getListView(),    //Basic listView
     ),
+
   ));
 }
 
-Widget getListview(){
+/*
+Long List
+ */
+
+//1.prepare the data source
+
+List<String> getListElements(){
+  var items = List<String>.generate(100, (index) => "Item $index");
+  return items;
+}
+
+//2. Convert data source into widgets
+Widget getLongListView(){
+
+  var listItems = getListElements();
+
+  var listView = ListView.builder(
+      itemCount: listItems.length,
+      itemBuilder: (context, index){
+        return ListTile(
+          leading: Icon(Icons.arrow_right),
+          title: Text(listItems[index]),
+          onTap: (){
+            debugPrint("${listItems[index]} was tapped");
+          },
+        );
+      }
+      );
+
+  return listView;
+}
+
+/*
+Basic listView
+ */
+
+Widget getListView(){
 
   var listView = ListView(
     children: <Widget>[
@@ -53,25 +94,4 @@ Widget getListview(){
 
   return listView;
 }
-/*import 'package:flutter_app_tutorial/app_screens/first_screen.dart';
 
-void main() => runApp(new MyFlutterApp());
-
-class MyFlutterApp extends StatelessWidget{
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,  //Remove debug tag
-        title: "My Flutter App",
-        home: Scaffold(
-          appBar: AppBar(title: Text("My First App Screen"),),
-          body: FirstScreen()
-        )
-    );
-
-  }
-
-}*/
