@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     title: "Simple Interest calculator app",
     home: SIForm(),
+    theme: ThemeData(
+      brightness: Brightness.dark,
+      primaryColor: Colors.indigo,
+      accentColor: Colors.indigoAccent,
+    ),
   ));
 }
 
@@ -18,12 +24,14 @@ class SIForm extends StatefulWidget {
 
 class _SIForm extends State<SIForm> {
   var _currencies = ["Rupees", "Dollar", "Pound", "Euro", "Others"];
-
   var _currentItemSelected = "Rupees";
   final _minimumPadding = 5.0;
 
   @override
   Widget build(BuildContext context) {
+
+    TextStyle textStyle = Theme.of(context).textTheme.headline6;
+
     return Scaffold(
       //resizeToAvoidBottomPadding: false,
       appBar: AppBar(
@@ -41,10 +49,12 @@ class _SIForm extends State<SIForm> {
                 padding: EdgeInsets.only(
                     top: _minimumPadding, bottom: _minimumPadding),
                 child: TextField(
+                  style: textStyle,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       labelText: "Principle",
                       hintText: "Enter Principle e.g 12000",
+                      labelStyle: textStyle,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0))),
                 )),
@@ -53,10 +63,12 @@ class _SIForm extends State<SIForm> {
                 padding: EdgeInsets.only(
                     top: _minimumPadding, bottom: _minimumPadding),
                 child: TextField(
+                  style: textStyle,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       labelText: "Rate of Interest",
                       hintText: "In percent",
+                      labelStyle: textStyle,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5.0))),
                 )),
@@ -68,10 +80,12 @@ class _SIForm extends State<SIForm> {
                   children: [
                     Expanded(
                         child: TextField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
+                          style: textStyle,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
                           labelText: "Term",
                           hintText: "Term in years",
+                          labelStyle: textStyle,
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0))),
                     )),
@@ -98,14 +112,18 @@ class _SIForm extends State<SIForm> {
               child : Row(children: [
 
               Expanded(child: RaisedButton(
-                child: Text("Calculate"),
+                color: Theme.of(context).accentColor,
+                textColor: Theme.of(context).primaryColorDark,
+                child: Text("Calculate", textScaleFactor: 1.5,),
                 onPressed: (){
 
                 },
               )),
 
               Expanded(child: RaisedButton(
-                child: Text("Reset"),
+                color: Theme.of(context).primaryColorDark,
+                textColor: Theme.of(context).primaryColorLight,
+                child: Text("Reset",textScaleFactor: 1.5,),
                 onPressed: (){
 
                 },
@@ -115,7 +133,7 @@ class _SIForm extends State<SIForm> {
 
             Padding(
               padding: EdgeInsets.all(_minimumPadding * 2),
-              child: Text("Todo Text"),
+              child: Text("Todo Text", style: textStyle,),
              ),
 
           ],
@@ -142,5 +160,5 @@ class _SIForm extends State<SIForm> {
       _currentItemSelected = newSelectedValue;
     });
   }
-  
+
 }
