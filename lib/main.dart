@@ -1,7 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_tutorial/app_screens/note_detail.dart';
 import 'package:flutter_app_tutorial/app_screens/note_list.dart';
 
 void main(){
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget{
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: NoteDetail(),
+      home: NoteList(),
     );
   }
 

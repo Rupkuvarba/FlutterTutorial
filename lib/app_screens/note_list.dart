@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_tutorial/app_screens/note_detail.dart';
 
 class NoteList extends StatefulWidget{
 
@@ -27,6 +28,7 @@ class NoteListState extends State<NoteList>{
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           debugPrint('FAB clicked');
+          navigateToDetail('Add Note');
         },
         tooltip: 'Add Note',
         child: Icon(Icons.add),
@@ -58,11 +60,23 @@ class NoteListState extends State<NoteList>{
 
               onTap: (){
                 debugPrint('ListTile Tapped');
+                navigateToDetail('Edit Note');
               },
 
             ),
           );
         }
+    );
+  }
+
+  void navigateToDetail(String title){
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context){
+              return NoteDetail(title);
+            }
+        )
     );
   }
 
