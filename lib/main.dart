@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget{
   }
 }
 
-printFileContent() async{
-  //Future<String> fileContent = downLoadAFile();
-  String fileContent = await downLoadAFile();
-  print('the content of the file is --> $fileContent');
+printFileContent(){
+  Future<String> fileContent = downLoadAFile();
+  fileContent.then((resultValue) => print('The content of the file is resultValue --> $resultValue'));
+  //print('the content of the file is --> $fileContent');
 }
 
 //To download a file [Dummy long running operation]
