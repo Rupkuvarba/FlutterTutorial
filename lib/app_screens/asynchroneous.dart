@@ -10,20 +10,6 @@ void main(){
   print('main programm ends');
 }
 
-class MyApp extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "NoteKeeper",
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
-      home: NoteList(),
-    );
-  }
-}
-
 printFileContent(){
   Future<String> fileContent = downLoadAFile();
   fileContent.then((resultValue) => print('The content of the file is resultValue --> $resultValue'));
