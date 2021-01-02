@@ -23,6 +23,7 @@ class NoteDetailState extends State<NoteDetail>{
   String appBarTitle = '';
   var _priorities = ['High', 'Low'];
 
+  var _formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   DatabaseHelper databaseHelper = DatabaseHelper();
@@ -66,123 +67,145 @@ class NoteDetailState extends State<NoteDetail>{
         ),
       ),
 
-      body: Padding(
-        padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
-        child: ListView(
-          children: [
+      body: Form(
+          key: _formKey,
+          child: Padding(
+          padding: EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
+          child: ListView(
+            children: [
 
-            //First element
-            ListTile(
-              title: DropdownButton(
-                items: _priorities.map((dropDownStringItem)
-                => DropdownMenuItem(
-                    value: dropDownStringItem,
-                    child: Text(dropDownStringItem))).toList(),
+              //First element
+              ListTile(
+                title: DropdownButton(
+                  items: _priorities.map((dropDownStringItem)
+                  => DropdownMenuItem(
+                      value: dropDownStringItem,
+                      child: Text(dropDownStringItem))).toList(),
 
-                style: textStyle,
+                  style: textStyle,
 
-                value: getPriorityAsString(note.priority),
+                  value: getPriorityAsString(note.priority),
 
-                onChanged: (valueSelectedByUser){
-                  setState(() {
-                     updatePriorityAsInt(valueSelectedByUser);
-                  });
-                },
-              ),
-            ),
-
-            //Second Element
-            Padding(
-              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-              child: TextField(
-                controller: titleController,
-                style: textStyle,
-                onChanged: (value){
-                  debugPrint('something changed on title text field');
-                  updateTitle();
-                },
-                decoration: InputDecoration(
-                  labelText: 'Title',
-                  labelStyle: textStyle,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  )
+                  onChanged: (valueSelectedByUser){
+                    setState(() {
+                       updatePriorityAsInt(valueSelectedByUser);
+                    });
+                  },
                 ),
               ),
-            ),
 
-            //Third Element
-            Padding(
-              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-              child: TextField(
-                controller: descriptionController,
-                style: textStyle,
-                onChanged: (value){
-                  debugPrint('something changed on description text field');
-                  updateDescription();
-                },
-                decoration: InputDecoration(
-                    labelText: 'Description',
+              //Second Element
+              Padding(
+                padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                child: TextFormField(
+                  controller: titleController,
+                  style: textStyle,
+                  validator: (String value){
+                    if(value.isEmpty){
+                    return 'Please enter title';
+                    }
+                  },
+                  onChanged: (value){
+                    debugPrint('something changed on title text field');
+                    updateTitle();
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Title',
                     labelStyle: textStyle,
+                    errorStyle: TextStyle(
+                      color: Colors.redAccent,
+                      fontSize: 15.0,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     )
+                  ),
                 ),
               ),
-            ),
 
-            //Fourth Element
-            Padding(
-              padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
-              child: Row(
+              //Third Element
+              Padding(
+                padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                child: TextFormField(
+                  controller: descriptionController,
+                  style: textStyle,
+                  validator: (String value){
+                    if(value.isEmpty){
+                      return 'Please enter description';
+                    }
+                  },
+                  onChanged: (value){
+                    debugPrint('something changed on description text field');
+                    updateDescription();
+                  },
+                  decoration: InputDecoration(
+                      labelText: 'Description',
+                      labelStyle: textStyle,
+                      errorStyle: TextStyle(
+                        color: Colors.redAccent,
+                        fontSize: 15.0,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      )
+                  ),
+                ),
+              ),
 
-                children: [
+              //Fourth Element
+              Padding(
+                padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                child: Row(
 
-                  //Expanded for equal space
-                  Expanded(
+                  children: [
+
+                    //Expanded for equal space
+                    Expanded(
+                        child: RaisedButton(
+                          color: Theme.of(context).primaryColorDark,
+                          textColor: Theme.of(context).primaryColorLight,
+                          child: Text(
+                            'Save',
+                            textScaleFactor: 1.5,
+                          ),
+                          onPressed: (){
+                            setState(() {
+                              debugPrint('Save button clicked');
+                              if(_formKey.currentState.validate()) {
+                                 //_save();
+                              }
+                            });
+                          },
+                        ),
+                    ),
+
+                    Container(width: 5.0,),
+
+                    Expanded(
                       child: RaisedButton(
                         color: Theme.of(context).primaryColorDark,
                         textColor: Theme.of(context).primaryColorLight,
                         child: Text(
-                          'Save',
+                          'Delete',
                           textScaleFactor: 1.5,
                         ),
                         onPressed: (){
                           setState(() {
-                            debugPrint('Save button clicked');
-                            _save();
+                            debugPrint('Delete button clicked');
+                            _delete();
                           });
                         },
                       ),
-                  ),
-
-                  Container(width: 5.0,),
-
-                  Expanded(
-                    child: RaisedButton(
-                      color: Theme.of(context).primaryColorDark,
-                      textColor: Theme.of(context).primaryColorLight,
-                      child: Text(
-                        'Delete',
-                        textScaleFactor: 1.5,
-                      ),
-                      onPressed: (){
-                        setState(() {
-                          debugPrint('Delete button clicked');
-                          _delete();
-                        });
-                      },
                     ),
-                  ),
 
-                ],
+                  ],
 
+                ),
               ),
-            ),
 
-          ],
-        ),
-      ),
+            ],
+          ),
+        )),
    ));
   }
 
