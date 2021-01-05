@@ -31,8 +31,8 @@ samples, guidance on mobile development, and a full API reference.
        - Faster app reload. Hot reload. 
     - AOT (Ahead Of Time) Compilation
        - While running apps on device it is much faster
-    For developers, JIT helps in faster app development
-    For app users, AOT helps in faster app execution
+    - For developers, JIT helps in faster app development
+    - For app users, AOT helps in faster app execution
     
 - Flutter is different: 
   - Faster development and execution due to JIT and AOT
